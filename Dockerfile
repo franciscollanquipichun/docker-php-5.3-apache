@@ -5,10 +5,17 @@ MAINTAINER https://github.com/cristianorsolin/docker-php-5.3-apache
 RUN apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates \
       curl \
+      postgresql-client \
       librecode0 \
       libmysqlclient-dev \
       libsqlite3-0 \
       libxml2 \
+      libpq-dev \
+      libmemcached-dev \
+      libpng12-dev \
+      libfreetype6-dev \
+      libssl-dev \
+      libmcrypt-dev \
     && apt-get clean \
     && rm -r /var/lib/apt/lists/*
 
@@ -91,8 +98,10 @@ RUN buildDeps=" \
             --enable-mbstring \
             --enable-mysqlnd \
             --with-mysql \
+            --with-pgsql \
             --with-mysqli \
             --with-pdo-mysql \
+            --with-pdo_pgsql \
             --with-curl \
             --with-openssl=/usr/local/ssl \
             --enable-soap \
@@ -101,6 +110,7 @@ RUN buildDeps=" \
             --with-readline \
             --with-recode \
             --with-zlib \
+            --with-mcrypt \
       && make -j"$(nproc)" \
       && make install \
       && { find /usr/local/bin /usr/local/sbin -type f -executable -exec strip --strip-all '{}' + || true; } \
