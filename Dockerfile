@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER https://github.com/cristianorsolin/docker-php-5.3-apache
+LABEL maintainer="https://github.com/cristianorsolin/docker-php-5.3-apache"
 
 # persistent / runtime deps
 RUN apt-get update && apt-get install -y --no-install-recommends \
